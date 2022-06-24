@@ -1,0 +1,66 @@
+{
+  "dfx": "0.9.3",
+  "canisters": {
+    "btc": {
+      "type": "custom",
+      "candid": "canister/candid.did",
+      "wasm": "target/wasm32-unknown-unknown/release/canister.wasm",
+      "build": "scripts/build-canister.sh"
+    },
+    "btc-example-rust": {
+      "type": "custom",
+      "candid": "examples/rust/candid.did",
+      "wasm": "target/wasm32-unknown-unknown/release/example.wasm",
+      "build": "scripts/build-example.sh"
+    },
+    "btc-example-common": {
+      "type": "custom",
+      "candid": "examples/common/candid.did",
+      "wasm": "target/wasm32-unknown-unknown/release/example-common.wasm",
+      "build": "scripts/build-example-common.sh"
+    },
+    "btconicpexample":{
+      "type":"motoko",
+       "main":"examples/motoko/src/BTConICP.mo",
+      "candid": "examples/motoko/candid.did",
+       "dependencies":[
+	"btc",
+	 "btc-example-common"
+       ]
+    },
+    "btcbank":{
+	"type":"motoko",
+	"main":"examples/motoko/src/Bank.mo"
+    },
+        "frontend_assets": {
+      "dependencies": [
+	      "btc",
+	 "btconicpexample"
+      ],
+      "frontend": {
+        "entrypoint": "src/frontend_assets/src/index.html"
+      },
+      "source": [
+        "src/frontend_assets/assets",
+        "dist/frontend_assets/"
+      ],
+      "type": "assets"
+    },
+    "test":{
+	    "type":"motoko",
+	    "main":"tests/main.mo"
+    }
+  },
+  "defaults": {
+    "build": {
+      "packtool": "vessel sources"
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    }
+  },
+  "version": 1
+}

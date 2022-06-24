@@ -1,0 +1,6 @@
+service : {
+  blob_test: (text) -> (vec nat8, text);
+  decode: (blob) -> (nat8, blob, vec nat8, nat8, opt text, opt text,
+   vec nat8, blob, opt text, nat32);
+  management_test: () -> (vec nat8, text, vec nat8);
+}

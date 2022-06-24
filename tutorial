@@ -1,0 +1,28 @@
+for this video's list
+
+send btc over layer1 to icp canister
+first show the btc on icp balance is 0
+open the invoice and send btc
+show we made it need 6 confirmations to be transacted 
+that means show with 1 and no balance deposited
+then do the 5 + more 
+show btc on icp balance is still 0 till after you close the invoice
+
+show that btc sent to icp is 1:1 besides the fee it takes
+send the btc on icp around to many other users/principals
+transact out the btc to a completely new l1 address 
+spam transactions over the btconicp canister and show how little the fees are
+   we note with reverse gas model users can literally pay feeless bitcoin if you subsidize the ledger canister in some other indirect method instead of a tx fee
+show that btc on icp transactions care not about the block time on btc but the block time on icp
+first show the cycles before the spam
+then show cycles after spam
+
+
+Finally
+emphasize this point: 
+once btc is sent to a canister its icp's network becomes a trustless intermediary for trading bitcoin while subjecting yourself to its network security speed and decentralization
+
+in essence the speed,security, and trustlessness of btc on the icp network is a lower bound of icp's network 
+
+so if you believe in icp's network then theres no need to worry that a canister is being used to issue a btc over the icp network 
+

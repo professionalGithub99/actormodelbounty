@@ -1,0 +1,85 @@
+type Utxo = 
+ record {
+   confirmations: nat32;
+   height: nat32;
+   outpoint: OutPoint;
+   value: Satoshi;
+ };
+type TxReceipt = 
+ variant {
+   Err:
+    variant {
+      AmountTooSmall;
+      BlockUsed;
+      ErrorOperationStyle;
+      ErrorTo;
+      InsufficientAllowance;
+      InsufficientBalance;
+      LedgerTrap;
+      Other: text;
+      Unauthorized;
+    };
+   Ok: nat;
+ };
+type SendError = 
+ variant {
+   InsufficientBalance;
+   InvalidPrivateKeyWif;
+   MalformedDestinationAddress;
+   MalformedSourceAddress;
+   MalformedTransaction;
+   Unknown;
+ };
+type Satoshi = nat64;
+type Result_2 = 
+ variant {
+   err: opt GetBalanceError;
+   ok: Satoshi;
+ };
+type Result_1 = 
+ variant {
+   err: opt GetUtxosError;
+   ok: GetUtxosData;
+ };
+type Result = 
+ variant {
+   err: SendError;
+   ok;
+ };
+type OutPoint = 
+ record {
+   txid: blob;
+   vout: nat32;
+ };
+type GetUtxosError = variant {MalformedAddress;};
+type GetUtxosData = 
+ record {
+   total_count: nat32;
+   utxos: vec Utxo;
+ };
+type GetBalanceError = variant {MalformedAddress;};
+type Account = 
+ service {
+   balance: () -> (Result_2);
+   btc_address: () -> (text);
+   get_utxos: () -> (Result_1);
+   send: (Satoshi, text) -> (Result);
+ };
+service : {
+  close_invoice: () -> (text, nat64);
+  create_or_view_current_deposit_invoice: () -> (text, text, nat64);
+  generate_private_key: () -> (text);
+  get_account_balance: () -> (text, nat64);
+  get_address_balance: (text) -> (text, nat64);
+  get_balance: (principal) -> (nat64);
+  get_utxos: () -> (Result_1);
+  invoice_to_used_accounts: (Account, nat64) -> () oneway;
+  mint: (principal, nat64) -> (nat64);
+  print_used_accounts: () -> (vec nat64);
+  send: (principal, nat64) -> (TxReceipt);
+  send_btc: (text, nat64, text) -> (text, nat64);
+  send_from_invoice: (nat64, text) -> () oneway;
+  sort_used_accounts: () -> () oneway;
+  totalSupply: () -> (nat64);
+  unwrap_btc: (nat64, text) -> (vec nat64);
+}
