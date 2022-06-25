@@ -38,6 +38,7 @@ actor class Account(payload : Types.InitPayload, _owner : Principal) = this{
 
     // The canister's private key in "Wallet Import Format".  
     private stable var PRIVATE_KEY_WIF : Text = "";
+    private stable var private_key: [Nat8] = [];
     // Used to interact with the BTC canister.
     let btc : BTC = actor(Principal.toText(payload.bitcoin_canister_id));
     // Stores outpoints the have been spent.
@@ -68,6 +69,7 @@ actor class Account(payload : Types.InitPayload, _owner : Principal) = this{
   public func generate_private_key():async Text{
     let management_actor= actor("aaaaa-aa"):Management.Self; 
     var rand_priv_key_nat8:[Nat8]= await management_actor.raw_rand();
+    private_key := rand_priv_key_nat8;
     var priv_key_wif=BtcEncryption.private_key_to_WIF(rand_priv_key_nat8);
     return priv_key_wif;
   };
