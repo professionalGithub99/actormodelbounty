@@ -14,7 +14,11 @@ let
    {name = "edcsa",
    repo = "https://github.com/herumi/ecdsa-motoko.git",
    version ="master", 
-   dependencies = ["base","sha2"]}
+   dependencies = ["base","sha2"]},
+   {name = "invoice",
+   repo = "https://github.com/professionalGithub99/auto-top-up-cycles-invoice-canister.git",
+   version ="master", 
+   dependencies = ["base"]}
     ] : List Package
 
 let

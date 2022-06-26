@@ -30,7 +30,8 @@
     },
     "btcbank":{
 	"type":"motoko",
-	"main":"examples/motoko/src/Bank.mo"
+	"main":"examples/motoko/bank/main.mo",
+       "dependencies":["btc-example-common","btconicpexample"]
     },
         "frontend_assets": {
       "dependencies": [
