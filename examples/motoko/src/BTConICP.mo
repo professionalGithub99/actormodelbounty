@@ -27,6 +27,16 @@ actor WrappedBitcoin{
   var private_key_wif="";
   var private_key:[Nat8]=[];
   var private_key_decimal:Nat=0;
+   public func balance(_address:Text) : async Result.Result<Types.Satoshi, ?Types.GetBalanceError> {
+    switch (await btc.get_balance({ address=_address; min_confirmations=?6 })) {
+      case (#Ok(satoshi)) {
+#ok(satoshi)
+      };
+      case (#Err(err)) {
+#err(err)
+      };
+    }
+  };
   public shared({caller}) func createAccount(): async (Result.Result<Types.TxSuccess,?Types.TxError>,Blob)
   {
     let two_random_numbers=await generate_random();
