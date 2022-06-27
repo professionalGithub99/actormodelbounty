@@ -126,6 +126,12 @@ actor BtcFederalReserve {
       };
   };
   };
+    public func verify_message(_msg:[Nat8],_sig:edcsa.Signature,):async Bool{
+    var pub_key= edcsa.getPublicKey(#non_zero(#fr(private_key_decimal)));
+    var iter_msg=_msg.vals();
+    let res= edcsa.verify(pub_key,iter_msg,_sig);
+    return res;
+  };
 }
 
  
